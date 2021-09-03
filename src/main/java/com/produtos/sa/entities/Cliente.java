@@ -1,12 +1,15 @@
 package com.produtos.sa.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente implements Serializable{
@@ -19,6 +22,9 @@ public class Cliente implements Serializable{
 	private String nome;
 	private String cpf;
 	private String dataNascimento;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente () {
 		
@@ -63,6 +69,10 @@ public class Cliente implements Serializable{
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -83,8 +93,11 @@ public class Cliente implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + "]";
+		return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf 
+				+ ", dataNascimento=" + dataNascimento + "]";
 	}
+
+	
 	
 	
 	
