@@ -1,12 +1,15 @@
 package com.produtos.sa.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Categoria implements Serializable{
@@ -17,6 +20,9 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@Transient
+	private Set<Produto> produtos = new HashSet<>();
 	
 	public Categoria() {
 		
@@ -43,6 +49,10 @@ public class Categoria implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Set<Produto> getProdutos() {
+		return produtos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -60,6 +70,8 @@ public class Categoria implements Serializable{
 		Categoria other = (Categoria) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 	
 

@@ -11,10 +11,12 @@ import org.springframework.context.annotation.Profile;
 import com.produtos.sa.entities.Categoria;
 import com.produtos.sa.entities.Cliente;
 import com.produtos.sa.entities.Pedido;
+import com.produtos.sa.entities.Produto;
 import com.produtos.sa.entities.enums.PedidoStatus;
 import com.produtos.sa.repositories.CategoriaRepository;
 import com.produtos.sa.repositories.ClienteRepository;
 import com.produtos.sa.repositories.PedidoRepository;
+import com.produtos.sa.repositories.ProdutoRepository;
 
 
 @Configuration
@@ -29,6 +31,9 @@ public class TesteConfig implements CommandLineRunner{
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -37,7 +42,14 @@ public class TesteConfig implements CommandLineRunner{
 		Categoria cat2 = new Categoria(null, "Livros");
 		Categoria cat3 = new Categoria(null, "Computadores");
 		
+		Produto pr1 = new Produto(null, "Previdência Particular", "A nova aposentadoria", 20.0);
+		Produto pr2 = new Produto(null, "Smart TV", "55 polegadas", 2000.0);
+		Produto pr3 = new Produto(null, "Notebook", "14 polegadas", 1500.0);
+		Produto pr4 = new Produto(null, "Desktop", "21 polegadas", 1300.0);
+		Produto pr5 = new Produto(null, "Nunca foi sorte", "Motivacional", 25.0);
+		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		produtoRepository.saveAll(Arrays.asList(pr1, pr2, pr3, pr4, pr5));
 		
 		Cliente cl1 = new Cliente(null, "Maria", "55533344422", "25/08/1987");
 		Cliente cl2 = new Cliente(null, "Rebeca", "77766655544", "25/09/1989");
