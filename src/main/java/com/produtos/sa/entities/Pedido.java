@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.produtos.sa.entities.enums.PedidoStatus;
+
 @Entity
 public class Pedido implements Serializable{
 	
@@ -19,9 +22,11 @@ public class Pedido implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String totalCompra;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant dataCompra;
-	private String produto;
+
+	private Integer pedidoStatus;
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -31,12 +36,11 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Long id, String totalCompra, Instant dataCompra, String produto, Cliente cliente) {
+	public Pedido(Long id, Instant dataCompra, PedidoStatus pedidoStatus, Cliente cliente) {
 		super();
 		this.id = id;
-		this.totalCompra = totalCompra;
 		this.dataCompra = dataCompra;
-		this.produto = produto;
+		setPedidoStatus(pedidoStatus);
 		this.cliente = cliente;
 	}
 
@@ -48,14 +52,6 @@ public class Pedido implements Serializable{
 		this.id = id;
 	}
 
-	public String getTotalCompra() {
-		return totalCompra;
-	}
-
-	public void setTotalCompra(String totalCompra) {
-		this.totalCompra = totalCompra;
-	}
-
 	public Instant getDataCompra() {
 		return dataCompra;
 	}
@@ -63,19 +59,22 @@ public class Pedido implements Serializable{
 	public void setDataCompra(Instant dataCompra) {
 		this.dataCompra = dataCompra;
 	}
-
-	public String getProduto() {
-		return produto;
+	
+	public PedidoStatus getPedidoStatus() {
+		return PedidoStatus.valueOf(pedidoStatus);
 	}
 
-	public void setProduto(String produto) {
-		this.produto = produto;
+	public void setPedidoStatus(PedidoStatus pedidoStatus) {
+		if (pedidoStatus != null) {
+			this.pedidoStatus = pedidoStatus.getCode();
+		}
+		
 	}
 
 	public Cliente getCliente() {
 		return cliente;
 	}
-
+	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
