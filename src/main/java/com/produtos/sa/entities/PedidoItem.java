@@ -17,18 +17,18 @@ public class PedidoItem implements Serializable{
 	private PedidoItemPK id = new PedidoItemPK();
 	
 	private Integer quantidade;
-	private Double price;
+	private Double preco;
 	
 	public PedidoItem() {
 		
 	}
 	
-	public PedidoItem(Pedido pedido, Produto produto, Integer quantidade, Double price) {
+	public PedidoItem(Pedido pedido, Produto produto, Integer quantidade, Double preco) {
 		super();
 		id.setPedido(pedido);
 		id.setProduto(produto);
 		this.quantidade = quantidade;
-		this.price = price;
+		this.preco = preco;
 	}
 	
 	@JsonIgnore
@@ -56,14 +56,18 @@ public class PedidoItem implements Serializable{
 		this.quantidade = quantidade;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
+	public Double getSubTotal() {
+		return preco * quantidade;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
