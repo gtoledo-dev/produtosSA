@@ -39,10 +39,6 @@ public class PedidoItem implements Serializable{
 	public void setPedido(Pedido pedido) {
 		id.setPedido(pedido);
 	}
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
 	
 	public Produto getProduto() {
 		return id.getProduto();
@@ -52,6 +48,10 @@ public class PedidoItem implements Serializable{
 		id.setProduto(produto);
 	}
 
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+	
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
