@@ -27,5 +27,9 @@ public class ClienteService {
 	public Cliente insert(Cliente obj) {
 		return clienteRepository.save(obj);
 	}
+	
+	public void delete(Long id) {
+		clienteRepository.deleteById(id);
+	}
 
 }
