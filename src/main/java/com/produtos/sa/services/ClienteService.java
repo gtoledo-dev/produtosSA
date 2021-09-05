@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.produtos.sa.entities.Cliente;
 import com.produtos.sa.repositories.ClienteRepository;
+import com.produtos.sa.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClienteService {
@@ -21,7 +22,7 @@ public class ClienteService {
 	
 	public Cliente findById(Long id) {
 		Optional<Cliente> obj = clienteRepository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Cliente inserir(Cliente obj) {
