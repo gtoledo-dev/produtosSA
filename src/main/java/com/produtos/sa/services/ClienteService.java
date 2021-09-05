@@ -24,12 +24,24 @@ public class ClienteService {
 		return obj.get();
 	}
 	
-	public Cliente insert(Cliente obj) {
+	public Cliente inserir(Cliente obj) {
 		return clienteRepository.save(obj);
 	}
 	
-	public void delete(Long id) {
+	public void deletar(Long id) {
 		clienteRepository.deleteById(id);
+	}
+	
+	public Cliente atualizar(Long id, Cliente obj) {
+		Cliente entidade = clienteRepository.getOne(id);
+		updateData(entidade, obj);
+		return clienteRepository.save(entidade);
+	}
+
+	private void updateData(Cliente entidade, Cliente obj) {
+		entidade.setNome(obj.getNome());
+		entidade.setCpf(obj.getCpf());
+		entidade.setDataNascimento(obj.getDataNascimento());		
 	}
 
 }
