@@ -23,5 +23,9 @@ public class ClienteService {
 		Optional<Cliente> obj = clienteRepository.findById(id);
 		return obj.get();
 	}
+	
+	public Cliente insert(Cliente obj) {
+		return clienteRepository.save(obj);
+	}
 
 }
