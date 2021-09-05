@@ -67,7 +67,7 @@ public class TesteConfig implements CommandLineRunner{
 		produtoRepository.saveAll(Arrays.asList(pr1, pr2, pr3, pr4, pr5));
 		
 		Cliente cl1 = new Cliente(null, "Maria", "55533344422", "25/08/1987");
-		Cliente cl2 = new Cliente(null, "Rebeca", "77766655544", "25/09/1989");
+		Cliente cl2 = new Cliente(null, "Rebeca", "88877755544", "25/09/1989");
 		
 		Pedido p1 = new Pedido(null, Instant.parse("2021-06-20T19:53:07Z"), PedidoStatus.EFETUADO_PAGAMENTO, cl1);
 		Pedido p2 = new Pedido(null, Instant.parse("2021-07-21T03:42:10Z"), PedidoStatus.AGUARDANDO_PAGAMENTO,cl2);
