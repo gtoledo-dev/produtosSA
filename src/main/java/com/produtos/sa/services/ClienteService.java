@@ -3,6 +3,8 @@ package com.produtos.sa.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -44,9 +46,14 @@ public class ClienteService {
 	}
 	
 	public Cliente atualizar(Long id, Cliente obj) {
-		Cliente entidade = clienteRepository.getOne(id);
-		updateData(entidade, obj);
-		return clienteRepository.save(entidade);
+		try {
+			Cliente entidade = clienteRepository.getOne(id);
+			updateData(entidade, obj);
+			return clienteRepository.save(entidade);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
 	}
 
 	private void updateData(Cliente entidade, Cliente obj) {
